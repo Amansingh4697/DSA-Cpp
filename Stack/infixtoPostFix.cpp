@@ -32,13 +32,18 @@ class Solution {
                 st.pop();
             }
             else{
-                 while(!st.empty() &&( (priorty(s[i]) < priorty(st.top())) 
-                 || ((priorty(s[i]) == priorty(st.top())) && s[i] != '^'))
-                     
-                 ){
+                 if(s[i] == '^'){
+                     while(!st.empty() && (priorty(s[i])<priorty(st.top()))){
+                         ans = ans + st.top();
+                         st.pop();
+                     }
+                 }
+                 else{
+                    while(!st.empty() && (priorty(s[i]) <= priorty(st.top()))){
                      ans = ans+st.top();
                      st.pop();
-                  }
+                  }  
+                 }
                   st.push(s[i]);
             }
             i++;
