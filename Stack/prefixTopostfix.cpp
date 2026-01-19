@@ -1,0 +1,22 @@
+// User function Template for C++
+
+class Solution {
+  public:
+    string preToPost(string pre_exp) {
+        int i = pre_exp.size()-1;
+        stack<string> st;
+        while(i>=0){
+             if((pre_exp[i]>='A' && pre_exp[i]<='Z')|| (pre_exp[i]>='a' && pre_exp[i]<='z')
+            || (pre_exp[i]>='0' && pre_exp[i]<='9')){
+                st.push(string(1,pre_exp[i]));
+            }else{
+                string top1 = st.top();st.pop();
+                string top2 = st.top();st.pop();
+                string temp = top1+top2+pre_exp[i];
+                st.push(temp);
+            }
+            i--;
+        }
+        return st.top();
+    }
+};
