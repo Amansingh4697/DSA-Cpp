@@ -72,3 +72,56 @@ class Solution {
        return ans;
     }
 };
+// leetcode problem
+class MedianFinder {
+public:
+   vector<int> list;
+    MedianFinder() {
+        
+    }
+    priority_queue<int> left_max_heap;
+    priority_queue<int, vector<int>, greater<int>> right_min_heap;
+    void addNum(int num) {
+         if(left_max_heap.empty() || num<left_max_heap.top()){
+            left_max_heap.push(num);
+         }
+         else{
+            right_min_heap.push(num);
+         }
+         if(left_max_heap.size()<right_min_heap.size()){
+            left_max_heap.push(right_min_heap.top());
+            right_min_heap.pop();
+         }
+         else if((left_max_heap.size() - right_min_heap.size())>1){
+                right_min_heap.push(left_max_heap.top());
+                left_max_heap.pop();
+            }
+    }
+    
+    double findMedian() {
+        // sort(list.begin(),list.end());
+        // int n = list.size();
+        // if(n % 2 != 0){
+        //     int index1 = n/2;
+        //     double m = list[index1];
+        //     return m;
+        // }
+        // else{
+        //     int index1 = n/2-1;
+        //     int index2 = n/2;
+        //     double m = (list[index1] + list[index2])/2.0;
+        //     return m;
+        // }
+        if(left_max_heap.size() == right_min_heap.size()){
+            return (left_max_heap.top()+right_min_heap.top())/2.0;
+        }
+        return left_max_heap.top();
+    }
+};
+
+/**
+ * Your MedianFinder object will be instantiated and called as such:
+ * MedianFinder* obj = new MedianFinder();
+ * obj->addNum(num);
+ * double param_2 = obj->findMedian();
+ */
