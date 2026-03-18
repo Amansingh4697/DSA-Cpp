@@ -17,3 +17,24 @@ vector<int> Solution::solve(vector<int> &A, vector<int> &B, int C) {
     reverse(ans.begin(), ans.end());
     return ans;
 }
+//optimal approach
+vector<int> Solution::solve(vector<int> &A, vector<int> &B, int C) {
+    vector<int> ans;
+    priority_queue<pair<int,int>> pq;
+    sort(A.begin(),A.end());
+    sort(B.begin(),B.end());
+    for(int i = 0;i<A.size();i++){
+        pq.push({(A[i]+B[B.size()-1]),B.size()-1});
+    }
+    while(!pq.empty() && C--){
+        int sum = pq.top().first;
+        int index = pq.top().second;
+        ans.push_back(sum);
+        pq.pop();
+        if(index-1>=0){
+            pq.push({sum-B[index]+B[index-1],index-1});
+        }
+    }
+    return ans;
+}
+
