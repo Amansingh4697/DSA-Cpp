@@ -32,5 +32,34 @@ public:
             if(max<0) return false;
         }
         return (min == 0);
+        // stack approach
+        // stack<pair<int,int>> pstack;
+        // stack<pair<int,int>> starstack;
+        // for(int i = 0;i<s.size();i++){
+        //     if(s[i] == '('){
+        //         pstack.push({i,'('});
+        //     }
+        //     else if(s[i] == ')'){
+        //         if(!pstack.empty()){
+        //             pstack.pop();
+        //         }
+        //         else if(!starstack.empty()){
+        //             starstack.pop();
+        //         }
+        //         else{
+        //             return false;
+        //         }
+        //     }
+        //     else{
+        //        starstack.push({i,'*'}); 
+        //     }
+        // }
+        // while(!pstack.empty()){
+        //      if(starstack.empty()) return false;
+        //      if(pstack.top().first > starstack.top().first) return false;
+        //      pstack.pop();
+        //      starstack.pop();
+        // }
+        // return true;
     }
 };
